@@ -1,0 +1,40 @@
+{
+  "holidays": [
+    {
+      "day": "14",
+      "month": "NOV",
+      "name": "Diwali Balipratipada",
+      "type": "EQUITY & DERIVATIVES"
+    },
+    {
+      "day": "27",
+      "month": "NOV",
+      "name": "Gurunanak Jayanti",
+      "type": "EQUITY & DERIVATIVES"
+    },
+    {
+      "day": "25",
+      "month": "DEC",
+      "name": "Christmas",
+      "type": "EQUITY & DERIVATIVES"
+    },
+    {
+      "day": "26",
+      "month": "JAN",
+      "name": "Republic Day",
+      "type": "EQUITY & DERIVATIVES"
+    },
+    {
+      "day": "08",
+      "month": "MAR",
+      "name": "Mahashivratri",
+      "type": "EQUITY & DERIVATIVES"
+    },
+    {
+      "day": "25",
+      "month": "MAR",
+      "name": "Holi",
+      "type": "EQUITY & DERIVATIVES"
+    }
+  ]
+}

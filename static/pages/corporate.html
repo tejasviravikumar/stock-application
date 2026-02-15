@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Actions - StockEx</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/styleforallpages.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <i class="fa-regular fa-calendar"></i>
+            <span id="topDateTime">OCT 24, 2023 | 10:45:22 AM</span>
+            <span class="market-status-top">
+                <i class="fa-solid fa-circle"></i>
+                MARKET OPEN
+            </span>
+        </div>
+        <div class="top-bar-right">
+            <a href="../pages/signin.html" class="top-link">LOGIN</a>
+            <a href="../pages/signup.html" class="top-link">REGISTER</a>
+            <button class="theme-toggle">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg width="30" height="30" viewBox="0 0 30 30">
+                    <path d="M5 20 L10 15 L15 18 L20 10 L25 13" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="10" cy="15" r="2" fill="white"/>
+                    <circle cx="15" cy="18" r="2" fill="white"/>
+                    <circle cx="20" cy="10" r="2" fill="white"/>
+                    <circle cx="25" cy="13" r="2" fill="white"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-main">STOCKEX</span>
+                    <span class="logo-sub">INDIA'S VIRTUAL EXCHANGE</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <input type="text" placeholder="Search for a Company" class="search-input">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="trading-account">
+                <span class="account-label">TRADING ACCOUNT</span>
+                <span class="account-balance">₹ 10,00,000.00</span>
+            </div>
+            <button class="user-icon"><i class="fa-solid fa-user"></i></button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../pages/Mainpage.html" class="nav-item">MAINBOARD <i class="fa-solid fa-chevron-down"></i></a>
+            <a href="../pages/corporate.html" class="nav-item active">CORPORATE</a>
+            <a href="../pages/resources.html" class="nav-item">RESOURCES</a>
+            <a href="#" class="nav-item">ABOUT US</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="../pages/Mainpage.html">HOME</a>
+            <span>/</span>
+            <a href="../pages/corporate.html">CORPORATE</a>
+            <span>/</span>
+            <span>CORPORATE ACTIONS</span>
+            <div class="nifty-indicator">
+                NIFTY 50: <span id="niftyValue">19,824.50</span> <span id="niftyChange" class="positive">(+0.45%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Corporate Actions & Announcements</h1>
+                <p>Stay updated with the latest corporate events, board meetings, and financial decisions across the market.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="meetings">Board Meetings</button>
+                    <button class="tab" data-tab="dividends">Dividends</button>
+                    <button class="tab" data-tab="bonus">Bonus Issues</button>
+                    <button class="tab" data-tab="splits">Stock Splits</button>
+                    <button class="tab" data-tab="rights">Rights Issues</button>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Left Column - Main Table -->
+                <div class="main-section">
+                    <div class="table-container">
+                        <table class="corporate-table">
+                            <thead>
+                                <tr>
+                                    <th>SYMBOL</th>
+                                    <th>MEETING DATE</th>
+                                    <th>PURPOSE</th>
+                                    <th>LTP (₹)</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corporateTableBody">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        <div class="table-footer">
+                            <span class="last-updated">LAST UPDATED: <span id="lastUpdated">OCT 24, 2023 10:45:22 IST</span></span>
+                            <a href="#" class="view-all">VIEW ALL CORPORATE ACTIONS →</a>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Cards Row -->
+                    <div class="bottom-cards">
+                        <!-- Market Watch -->
+                        <div class="card market-watch-card">
+                            <div class="card-header">
+                                <h3>MARKET WATCH</h3>
+                                <button class="refresh-btn">
+                                    <i class="fa-solid fa-arrows-rotate"></i>
+                                </button>
+                            </div>
+                            <div class="market-watch-list" id="marketWatchList">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Announcements -->
+                        <div class="card announcements-card">
+                            <div class="card-header">
+                                <h3>ANNOUNCEMENTS</h3>
+                                <button class="refresh-btn">
+                                    <i class="fa-solid fa-arrows-rotate"></i>
+                                </button>
+                            </div>
+                            <div class="announcements-list" id="announcementsList">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <aside class="sidebar-section">
+                    <!-- Upcoming Holidays -->
+                    <div class="card holiday-card">
+                        <div class="card-header">
+                            <h3>UPCOMING HOLIDAYS</h3>
+                        </div>
+                        <div class="holiday-item">
+                            <div class="holiday-date">
+                                <div class="holiday-day">14</div>
+                                <div class="holiday-month">NOV</div>
+                            </div>
+                            <div class="holiday-info">
+                                <div class="holiday-name">Diwali Balipratipada</div>
+                                <div class="holiday-type">EQUITY & DERIVATIVES</div>
+                                <div class="holiday-status">
+                                    <i class="fa-solid fa-circle" style="color: #ef4444;"></i>
+                                    Market Closed
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-calendar-link">View Full Holiday Calendar</a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ABOUT THE EXCHANGE</h4>
+                <p>This is a virtual trading platform inspired by the official NSE portal for educational purposes. No real money or trading is involved. This tool helps beginners understand market dynamics in a risk-free environment.</p>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="#">Listing Services</a></li>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Investors</a></li>
+                    <li><a href="#">Regulations</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONTACT</h4>
+                <p><i class="fa-solid fa-envelope"></i> support@virtual-exchange.edu</p>
+                <p><i class="fa-solid fa-phone"></i> 1800 123 4567</p>
+                <p><i class="fa-solid fa-location-dot"></i> Financial District, Virtual Hub, IN</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 VIRTUAL EXCHANGE EDUCATIONAL PORTAL. ALL RIGHTS RESERVED.</p>
+            <div class="footer-links">
+                <a href="#">TERMS OF USE</a>
+                <a href="#">PRIVACY POLICY</a>
+                <a href="#">SITE MAP</a>
+            </div>
+            <div class="footer-badges">
+                <div class="badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    SECURE & EDUCATIONAL ENVIRONMENT
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script/corporate.js"></script>
+</body>
+</html>

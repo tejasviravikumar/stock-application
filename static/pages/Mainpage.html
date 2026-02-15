@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockEx - India's Virtual Exchange</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/styleforallpages.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <i class="fa-regular fa-calendar"></i>
+            <span id="topDateTime">OCT 24, 2023 | 10:45:22 AM</span>
+            <span class="market-status-top">
+                <i class="fa-solid fa-circle"></i>
+                MARKET OPEN
+            </span>
+        </div>
+        <div class="top-bar-right">
+            <a href="../pages/signin.html" class="top-link">LOGIN</a>
+            <a href="../pages/signup.html" class="top-link">REGISTER</a>
+            <button class="theme-toggle">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg width="30" height="30" viewBox="0 0 30 30">
+                    <path d="M5 20 L10 15 L15 18 L20 10 L25 13" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="10" cy="15" r="2" fill="white"/>
+                    <circle cx="15" cy="18" r="2" fill="white"/>
+                    <circle cx="20" cy="10" r="2" fill="white"/>
+                    <circle cx="25" cy="13" r="2" fill="white"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-main">STOCKEX</span>
+                    <span class="logo-sub">INDIA'S VIRTUAL EXCHANGE</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <input type="text" placeholder="Search for a Company" class="search-input">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="trading-account">
+                <span class="account-label">TRADING ACCOUNT</span>
+                <span class="account-balance">₹ 10,00,000.00</span>
+            </div>
+            <button class="user-icon"><i class="fa-solid fa-user"></i></button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../pages/Mainpage.html" class="nav-item active">MAINBOARD <i class="fa-solid fa-chevron-down"></i></a>
+            <a href="../pages/corporate.html" class="nav-item">CORPORATE</a>
+            <a href="../pages/resources.html" class="nav-item">RESOURCES</a>
+            <a href="../pages/aboutus.html" class="nav-item">ABOUT US</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="../pages/Mainpage.html">HOME</a>
+            <span>/</span>
+            <a href="../pages/Mainpage.html">MAINBOARD</a>
+            <span>/</span>
+            <span>SME SECURITIES</span>
+            <div class="nifty-breadcrumb">
+                NIFTY SME EMERGE: <span id="niftyBreadcrumbValue">12,456.80</span> <span id="niftyBreadcrumbChange" class="positive">(+1.12%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar and Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="../pages/Mainpage.html" class="sidebar-item active">SME Securities</a>
+            <a href="../pages/Etf.html" class="sidebar-item">ETF Segment</a>
+            <a href="../pages/Fno.html" class="sidebar-item">F&O Securities</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>SME SECURITIES VIEW</h1>
+                <p>Monitor Small and Medium Enterprise (SME) listings and performance on the virtual trading floor.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-wrapper">
+                <div class="tabs">
+                    <button class="tab active" data-tab="active">ACTIVE SME STOCKS</button>
+                    <button class="tab" data-tab="gainers">TOP GAINERS</button>
+                    <button class="tab" data-tab="losers">TOP LOSERS</button>
+                    <button class="tab" data-tab="new">NEW LISTINGS</button>
+                </div>
+                <button class="export-btn">
+                    <i class="fa-solid fa-download"></i> EXPORT CSV
+                </button>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Main Table Section -->
+                <div class="main-section">
+                    <!-- Stock Table -->
+                    <div class="table-container">
+                        <table class="stock-table">
+                            <thead>
+                                <tr>
+                                    <th>SYMBOL</th>
+                                    <th>LTP (₹)</th>
+                                    <th>% CHANGE</th>
+                                    <th>VOLUME (QTY)</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stockTableBody">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        <div class="table-footer">
+                            <span class="last-updated">LAST UPDATED: <span id="lastUpdated"></span></span>
+                            <div class="pagination">
+                                <button class="page-btn">&lt;</button>
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">&gt;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <aside class="right-sidebar">
+                    <!-- Market Watch -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>MARKET WATCH</h3>
+                            <button class="refresh-btn">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </button>
+                        </div>
+                        <div class="market-watch" id="marketWatch">
+                            <!-- Data will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Announcements -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>ANNOUNCEMENTS</h3>
+                            <button class="refresh-btn">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </button>
+                        </div>
+                        <div class="announcements" id="announcements">
+                            <!-- Data will be populated by JavaScript -->
+                        </div>
+                        <a href="#" class="view-all-news">VIEW ALL NEWS →</a>
+                    </div>
+
+                    <!-- Beginner's Tip -->
+                    <div class="card tip-card">
+                        <div class="tip-icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3>BEGINNER'S TIP</h3>
+                        <p>SME stocks often have lower liquidity than large-cap stocks. Observe the VOLUME column to understand market interest before trading.</p>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ABOUT THE EXCHANGE</h4>
+                <p>StockEx is a virtual trading environment designed for students and beginners to learn market dynamics without financial risk. This portal replicates the functionality of the official NSE interface.</p>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="#">SME Listings</a></li>
+                    <li><a href="#">Market Rules</a></li>
+                    <li><a href="#">Trading Guide</a></li>
+                    <li><a href="#">Help Desk</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONTACT INFORMATION</h4>
+                <p><i class="fa-solid fa-envelope"></i> support@stockex-virtual.edu</p>
+                <p><i class="fa-solid fa-phone"></i> 1800-STOCK-EX (Toll Free)</p>
+                <p><i class="fa-solid fa-location-dot"></i> Learning Center, Fin-Tech Park, IN</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 STOCKEX EDUCATIONAL VIRTUAL EXCHANGE. ALL RIGHTS RESERVED.</p>
+            <div class="footer-links">
+                <a href="#">TERMS</a>
+                <a href="#">PRIVACY</a>
+                <a href="#">DISCLAIMER</a>
+            </div>
+            <div class="footer-badges">
+                <div class="badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    EMPOWERING NEXT-GEN MARKET LEADERS
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script/Mainpage.js"></script>
+</body>
+</html>

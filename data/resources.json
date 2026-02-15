@@ -1,0 +1,95 @@
+{
+  "resources": [
+    {
+      "id": 1,
+      "icon": "fa-building-columns",
+      "title": "Basics of Stock Market",
+      "description": "Learn what a share actually is and how the global stock exchanges facilitate the buying and selling of ownership.",
+      "readTime": "5 min read",
+      "views": "12.4k views",
+      "category": "beginner",
+      "badge": "easy",
+      "action": "Learn Now"
+    },
+    {
+      "id": 2,
+      "icon": "fa-wallet",
+      "title": "Understanding Dividends",
+      "description": "Discover how companies share their profits with investors and how to build a passive income stream through stocks.",
+      "readTime": "8 min read",
+      "category": "beginner",
+      "action": "Review",
+      "status": "Completed"
+    },
+    {
+      "id": 3,
+      "icon": "fa-file-invoice-dollar",
+      "title": "Reading a Balance Sheet",
+      "description": "Assets, liabilities, and equity explained. Learn to judge the financial health of any company before you invest.",
+      "views": "8.9k views",
+      "category": "fundamental",
+      "badge": "intermediate",
+      "action": "Start Lesson"
+    },
+    {
+      "id": 4,
+      "icon": "fa-chart-simple",
+      "title": "Introduction to Candles",
+      "description": "Unlock the visual language of price action. Understand what each candlestick pattern will tell you about market sentiment.",
+      "readTime": "4 min read",
+      "views": "21.2k views",
+      "category": "technical",
+      "action": "Learn Now"
+    },
+    {
+      "id": 5,
+      "icon": "fa-shield-halved",
+      "title": "The 2% Risk Rule",
+      "description": "Protect your capital. Learn the fundamental rule of professional risk management to ensure you stay in the game.",
+      "category": "risk",
+      "badge": "crucial",
+      "action": "Read Guide",
+      "rating": "Highly Rated"
+    },
+    {
+      "id": 6,
+      "icon": "fa-brain",
+      "title": "Psychology of Trading",
+      "description": "Master your emotions. Learn how fear and greed impact decision-making and how to stay disciplined.",
+      "readTime": "10 min read",
+      "category": "risk",
+      "action": "Start Lesson",
+      "status": "New Course"
+    },
+    {
+      "id": 7,
+      "icon": "fa-magnifying-glass-chart",
+      "title": "Technical Indicators Deep Dive",
+      "description": "Master RSI, MACD, and Bollinger Bands. Learn how to combine indicators for powerful trading signals.",
+      "readTime": "15 min read",
+      "views": "18.5k views",
+      "category": "technical",
+      "badge": "intermediate",
+      "action": "Start Lesson"
+    },
+    {
+      "id": 8,
+      "icon": "fa-scale-balanced",
+      "title": "Portfolio Diversification",
+      "description": "Don't put all your eggs in one basket. Learn how to build a balanced portfolio across sectors and assets.",
+      "readTime": "7 min read",
+      "category": "fundamental",
+      "action": "Learn Now"
+    },
+    {
+      "id": 9,
+      "icon": "fa-money-bill-trend-up",
+      "title": "Value Investing Fundamentals",
+      "description": "Warren Buffett's approach explained. Learn to identify undervalued stocks with strong long-term potential.",
+      "readTime": "12 min read",
+      "views": "15.7k views",
+      "category": "fundamental",
+      "action": "Start Lesson"
+    }
+  ]
+}

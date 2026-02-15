@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Charts - StockEx</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/charts.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <i class="fa-regular fa-calendar"></i>
+            <span id="topDateTime">OCT 24, 2023 | 10:45:22 AM</span>
+            <span class="market-status-top">
+                <i class="fa-solid fa-circle"></i>
+                MARKET OPEN
+            </span>
+        </div>
+        <div class="top-bar-right">
+            <a href="../pages/signin.html" class="top-link">Login</a>
+            <a href="../pages/signup.html" class="top-link">Register</a>
+            <button class="theme-toggle"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="logo-text">
+                    <span class="logo-main">STOCKEX</span>
+                    <span class="logo-sub">INDIA'S VIRTUAL EXCHANGE</span>
+                </div>
+            </div>
+            <div class="header-search">
+                <input type="text" id="symbolSearch" placeholder="Search for a Company Symbol..." class="search-input">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="header-right">
+                <div class="trading-account">
+                    <span class="account-label">TRADING ACCOUNT</span>
+                    <span class="account-balance">₹ 10,00,000.00</span>
+                </div>
+                <button class="user-btn"><i class="fa-solid fa-user"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../pages/Mainpage.html" class="nav-item">Mainboard <i class="fa-solid fa-chevron-down"></i></a>
+            <a href="../pages/corporate.html" class="nav-item">Corporate</a>
+            <a href="../pages/charts.html" class="nav-item active">Charts</a>
+            <a href="../pages/resources.html" class="nav-item">Resources</a>
+            <a href="#" class="nav-item">About Us</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="../pages/Mainpage.html">Home</a>
+            <span>/</span>
+            <a href="../pages/Mainpage.html">Mainboard</a>
+            <span>/</span>
+            <span>Live Charts</span>
+            <div class="nifty-breadcrumb">
+                NIFTY SME EMERGE: <span id="niftyBreadcrumbValue">12,456.80</span> 
+                <span id="niftyBreadcrumbChange" class="positive">(+1.12%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Stock Selector and Info -->
+            <div class="stock-selector-section">
+                <div class="stock-info">
+                    <div class="stock-header">
+                        <h1 id="currentSymbol">SMEGOLD</h1>
+                        <span class="stock-company" id="currentCompany">Goldstone Infra Ltd.</span>
+                    </div>
+                    <div class="stock-price-info">
+                        <div class="price-main">
+                            <span class="current-price" id="currentPrice">₹145.25</span>
+                            <span class="price-change" id="priceChange">+2.15 (+1.50%)</span>
+                        </div>
+                        <div class="price-details">
+                            <span class="detail-item">Open: <strong id="openPrice">143.50</strong></span>
+                            <span class="detail-item">High: <strong id="highPrice">146.80</strong></span>
+                            <span class="detail-item">Low: <strong id="lowPrice">142.90</strong></span>
+                            <span class="detail-item">Volume: <strong id="volumeValue">12,45,670</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-selector">
+                    <label>SELECT SYMBOL:</label>
+                    <select id="symbolSelect" class="symbol-dropdown">
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Chart Controls -->
+            <div class="chart-controls">
+                <div class="timeframe-buttons">
+                    <button class="timeframe-btn" data-timeframe="1D">1D</button>
+                    <button class="timeframe-btn active" data-timeframe="5D">5D</button>
+                    <button class="timeframe-btn" data-timeframe="1M">1M</button>
+                    <button class="timeframe-btn" data-timeframe="3M">3M</button>
+                    <button class="timeframe-btn" data-timeframe="6M">6M</button>
+                    <button class="timeframe-btn" data-timeframe="1Y">1Y</button>
+                </div>
+                <div class="chart-type-buttons">
+                    <button class="chart-type-btn active" data-type="candlestick">
+                        <i class="fa-solid fa-chart-candlestick"></i> Candlestick
+                    </button>
+                    <button class="chart-type-btn" data-type="line">
+                        <i class="fa-solid fa-chart-line"></i> Line
+                    </button>
+                    <button class="chart-type-btn" data-type="area">
+                        <i class="fa-solid fa-chart-area"></i> Area
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Chart Container -->
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Volume Chart -->
+            <div class="volume-chart-container">
+                <h3>Volume</h3>
+                <div class="volume-chart-wrapper">
+                    <canvas id="volumeChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Technical Indicators & Stats -->
+            <div class="charts-grid">
+                <!-- Technical Indicators Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-chart-simple"></i> TECHNICAL INDICATORS</h3>
+                    </div>
+                    <div class="indicators-list" id="indicatorsList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Market Statistics -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-square-poll-vertical"></i> MARKET STATISTICS</h3>
+                    </div>
+                    <div class="stats-list" id="statsList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Trading Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-clock"></i> RECENT TRADES</h3>
+                    </div>
+                    <div class="trades-list" id="tradesList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Learning Tip -->
+            <div class="info-card">
+                <i class="fa-solid fa-lightbulb"></i>
+                <div>
+                    <strong>Understanding Candlestick Charts</strong>
+                    <p>Green candles indicate the price closed higher than it opened (bullish), while red candles show the price closed lower (bearish). The "wicks" show the highest and lowest prices during that period. Volume bars below show trading activity - higher volume often confirms price movements.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ABOUT THE EXCHANGE</h4>
+                <p>StockEx is a virtual trading environment designed for students and beginners to learn market dynamics without financial risk. This portal replicates the functionality of the official NSE interface.</p>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK LINKS</h4>
+                <ul>
+                    <li><a href="#">SME Listings</a></li>
+                    <li><a href="#">Market Rules</a></li>
+                    <li><a href="#">Trading Guide</a></li>
+                    <li><a href="#">Help Desk</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONTACT INFORMATION</h4>
+                <p><i class="fa-solid fa-envelope"></i> support@stockex-virtual.edu</p>
+                <p><i class="fa-solid fa-phone"></i> 1800-STOCK-EX (Toll Free)</p>
+                <p><i class="fa-solid fa-location-dot"></i> Learning Center, Fin-Tech Park, IN</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 STOCKEX EDUCATIONAL VIRTUAL EXCHANGE. ALL RIGHTS RESERVED.</p>
+            <div class="footer-links">
+                <a href="#">TERMS</a>
+                <a href="#">PRIVACY</a>
+                <a href="#">DISCLAIMER</a>
+            </div>
+            <div class="footer-badges">
+                <div class="badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="badge">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <span class="badge-text">EMPOWERING NEXT-GEN MARKET LEADERS</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script/charts.js"></script>
+</body>
+</html>

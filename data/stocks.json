@@ -1,0 +1,143 @@
+{
+  "stocks": [
+    {
+      "symbol": "RELIANCE",
+      "ltp": 2456.20,
+      "change": 1.88,
+      "volume": 1245678,
+      "value": 305.80,
+      "high52w": 2630.00,
+      "low52w": 2180.00
+    },
+    {
+      "symbol": "INFY",
+      "ltp": 1450.00,
+      "change": 1.54,
+      "volume": 1567230,
+      "value": 227.25,
+      "high52w": 1672.45,
+      "low52w": 1215.45
+    },
+    {
+      "symbol": "TCS",
+      "ltp": 3412.00,
+      "change": 0.36,
+      "volume": 845002,
+      "value": 288.32,
+      "high52w": 3575.00,
+      "low52w": 3070.20
+    },
+    {
+      "symbol": "HDFCBANK",
+      "ltp": 1530.45,
+      "change": -0.34,
+      "volume": 2105678,
+      "value": 322.25,
+      "high52w": 1757.00,
+      "low52w": 1460.25
+    },
+    {
+      "symbol": "ICICIBANK",
+      "ltp": 940.10,
+      "change": -0.89,
+      "volume": 3245110,
+      "value": 305.10,
+      "high52w": 1008.70,
+      "low52w": 838.00
+    },
+    {
+      "symbol": "BHARTIARTL",
+      "ltp": 875.30,
+      "change": 2.15,
+      "volume": 1823456,
+      "value": 159.50,
+      "high52w": 920.00,
+      "low52w": 712.80
+    },
+    {
+      "symbol": "SBIN",
+      "ltp": 592.75,
+      "change": -1.23,
+      "volume": 4567890,
+      "value": 270.80,
+      "high52w": 625.00,
+      "low52w": 498.50
+    },
+    {
+      "symbol": "WIPRO",
+      "ltp": 412.60,
+      "change": 0.87,
+      "volume": 987654,
+      "value": 40.75,
+      "high52w": 445.30,
+      "low52w": 365.20
+    },
+    {
+      "symbol": "ITC",
+      "ltp": 445.80,
+      "change": 1.34,
+      "volume": 2345678,
+      "value": 104.55,
+      "high52w": 478.90,
+      "low52w": 392.15
+    },
+    {
+      "symbol": "AXISBANK",
+      "ltp": 975.20,
+      "change": -0.56,
+      "volume": 1654321,
+      "value": 161.35,
+      "high52w": 1036.75,
+      "low52w": 862.40
+    },
+    {
+      "symbol": "LT",
+      "ltp": 3256.40,
+      "change": 0.92,
+      "volume": 567890,
+      "value": 184.95,
+      "high52w": 3487.60,
+      "low52w": 2845.30
+    },
+    {
+      "symbol": "MARUTI",
+      "ltp": 9875.50,
+      "change": -0.45,
+      "volume": 234567,
+      "value": 231.60,
+      "high52w": 10450.00,
+      "low52w": 8735.20
+    },
+    {
+      "symbol": "SUNPHARMA",
+      "ltp": 1145.30,
+      "change": 1.67,
+      "volume": 876543,
+      "value": 100.40,
+      "high52w": 1236.75,
+      "low52w": 978.90
+    },
+    {
+      "symbol": "TATAMOTORS",
+      "ltp": 625.80,
+      "change": 2.89,
+      "volume": 3456789,
+      "value": 216.30,
+      "high52w": 678.45,
+      "low52w": 487.60
+    },
+    {
+      "symbol": "HINDUNILVR",
+      "ltp": 2567.90,
+      "change": 0.23,
+      "volume": 654321,
+      "value": 167.95,
+      "high52w": 2789.35,
+      "low52w": 2234.50
+    }
+  ],
+  "nifty50": {
+    "value": 19824.50,
+    "change": 0.45
+  }
+}

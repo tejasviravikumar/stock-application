@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F&O Securities - StockEx</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/styleforallpages.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <i class="fa-regular fa-calendar"></i>
+            <span id="topDateTime">OCT 24, 2023 | 10:45:22 AM</span>
+            <span class="market-status-top">
+                <i class="fa-solid fa-circle"></i>
+                MARKET OPEN
+            </span>
+        </div>
+        <div class="top-bar-right">
+            <a href="../pages/signin.html" class="top-link">LOGIN</a>
+            <a href="../pages/signup.html" class="top-link">REGISTER</a>
+            <button class="theme-toggle">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <svg width="30" height="30" viewBox="0 0 30 30">
+                    <path d="M5 20 L10 15 L15 18 L20 10 L25 13" stroke="white" stroke-width="2" fill="none"/>
+                    <circle cx="10" cy="15" r="2" fill="white"/>
+                    <circle cx="15" cy="18" r="2" fill="white"/>
+                    <circle cx="20" cy="10" r="2" fill="white"/>
+                    <circle cx="25" cy="13" r="2" fill="white"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-main">STOCKEX</span>
+                    <span class="logo-sub">INDIA'S VIRTUAL EXCHANGE</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <input type="text" placeholder="Search for a Company" class="search-input">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="trading-account">
+                <span class="account-label">TRADING ACCOUNT</span>
+                <span class="account-balance">₹ 10,00,000.00</span>
+            </div>
+            <button class="user-icon"><i class="fa-solid fa-user"></i></button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="../pages/Mainpage.html" class="nav-item active">MAINBOARD <i class="fa-solid fa-chevron-down"></i></a>
+            <a href="../pages/corporate.html" class="nav-item">CORPORATE</a>
+            <a href="../pages/resources.html" class="nav-item">RESOURCES</a>
+            <a href="#" class="nav-item">ABOUT US</a>
+        </div>
+    </nav>
+    </nav>
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="../pages/Mainpage.html">Home</a>
+            <span>/</span>
+            <a href="../pages/Mainpage.html">Mainboard</a>
+            <span>/</span>
+            <span>F&O Securities</span>
+            <div class="nifty-breadcrumb">
+                NIFTY 50: <span id="niftyValue">19,824.50</span> <span id="niftyChange" class="positive">(+0.45%)</span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                BANK NIFTY: <span id="bankNiftyValue">43,512.60</span> <span id="bankNiftyChange" class="negative">(-0.12%)</span>
+            </div>
+        </div>
+    </div>
+    <main class="main-content">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <div>
+                    <h1>Futures & Options (F&O)</h1>
+                    <p>Real-time derivatives data for active beginner traders.</p>
+                </div>
+                <button class="export-btn"><i class="fa-solid fa-download"></i> Export</button>
+            </div>
+            <div class="content-grid">
+                <div class="main-section">
+                    <div class="tabs-controls">
+                        <div class="tabs">
+                            <button class="tab active" data-tab="futures">Top Futures</button>
+                            <button class="tab" data-tab="equity">Equity Derivatives</button>
+                            <button class="tab" data-tab="index">Index Derivatives</button>
+                            <button class="tab" data-tab="chain">Option Chain</button>
+                        </div>
+                        <div class="filters">
+                            <select class="filter-select">
+                                <option>Stock Futures</option>
+                                <option>Index Futures</option>
+                            </select>
+                            <select class="filter-select">
+                                <option>26-Oct-2023</option>
+                                <option>30-Nov-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="fno-table">
+                            <thead>
+                                <tr>
+                                    <th>SYMBOL</th>
+                                    <th>LTP (₹)</th>
+                                    <th>% CHG</th>
+                                    <th>VOLUME</th>
+                                    <th>OPEN INTEREST</th>
+                                    <th>OI CHG (%)</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fnoTableBody"></tbody>
+                        </table>
+                        <div class="table-footer">
+                            <span class="last-updated">SHOWING 5 OF 184 SECURITIES</span>
+                            <div class="pagination">
+                                <button class="page-btn">&lt;</button>
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">&gt;</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <div>
+                            <strong>Understanding Open Interest (OI)</strong>
+                            <p>Open Interest represents the total number of outstanding derivative contracts. An increase in price with an increase in OI typically suggests a strong bullish trend.</p>
+                        </div>
+                    </div>
+                </div>
+                <aside class="sidebar">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>MARKET WATCH</h3>
+                            <button class="refresh-btn"><i class="fa-solid fa-arrows-rotate"></i></button>
+                        </div>
+                        <div class="market-watch" id="marketWatch"></div>
+                        <a href="#" class="view-all-link">VIEW ALL INDICES</a>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>TOP OI GAINERS</h3>
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="oi-gainers" id="oiGainers"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>UPCOMING EXPIRY</h3>
+                        </div>
+                        <div class="expiry-card">
+                            <div class="expiry-date">
+                                <div class="expiry-day">26</div>
+                                <div class="expiry-month">OCT</div>
+                            </div>
+                            <div class="expiry-info">
+                                <div class="expiry-name">Monthly Expiry</div>
+                                <div class="expiry-type">NIFTY & BANKNIFTY</div>
+                                <div class="expiry-status"><i class="fa-solid fa-circle"></i> 2 Days Left</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>EDUCATIONAL PLATFORM</h4>
+                <p>This is a virtual trading environment designed to teach beginners the fundamentals of the stock market, including derivatives like Futures and Options, without financial risk.</p>
+            </div>
+            <div class="footer-section">
+                <h4>F&O RESOURCES</h4>
+                <ul>
+                    <li><a href="#">F&O Basics for Beginners</a></li>
+                    <li><a href="#">Understanding Call & Put</a></li>
+                    <li><a href="#">Margin Requirements</a></li>
+                    <li><a href="#">Trading Strategies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>SUPPORT & SAFETY</h4>
+                <p><i class="fa-solid fa-circle-info"></i> Help Center & Documentation</p>
+                <p><i class="fa-solid fa-shield-halved"></i> No Real Money Involved</p>
+                <p><i class="fa-solid fa-graduation-cap"></i> Risk-Free Practice</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 STOCKEX EDUCATIONAL PORTAL. ALL DATA SHOWN IS SIMULATED.</p>
+            <div class="footer-links">
+                <a href="#">TERMS OF USE</a>
+                <a href="#">PRIVACY POLICY</a>
+                <a href="#">DISCLAIMERS</a>
+            </div>
+            <div class="footer-badge">EMPOWERING FUTURE INVESTORS</div>
+        </div>
+    </footer>
+    <script src="../script/fno.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../style/signin.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="primary-text">Welcome Back</h2>
+        <p class="subtitle">
+            Login to continue your virtual trading journey
+        </p>
+
+        <div class="form-container">
+            <form id="loginForm" class="signup-form">
+
+                <label class="secondary-text" for="username">Username</label>
+                <input
+                    class="inputBox"
+                    type="text"
+                    id="username"
+                    name="username"  
+                    placeholder="Username "
+                    autocomplete="username"
+                    required
+                >
+
+                <label class="secondary-text" for="password">Password</label>
+                <input
+                    class="inputBox"
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <p class="forgot">
+                    <a href="#">Forgot password?</a>
+                </p>
+
+                <button type="submit" class="submit-btn">
+                    Login
+                </button>
+
+                <p class="bottom-text">
+                    Don’t have an account?
+                    <a href="./signup.html">Create Account</a>
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="../script/signin.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root {
+    --font-primary: 'Outfit', sans-serif;
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+/* Page */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #0D1A63;
+    font-family: var(--font-primary);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Layout */
+.container {
+    text-align: center;
+    color: white;
+    max-width: 420px;
+    width: 100%;
+}
+
+/* Headings */
+.primary-text {
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+/* Card */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+}
+
+/* Form */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    text-align: left;
+    gap: 10px;
+}
+
+/* Labels */
+.secondary-text {
+    color: #2845D6;
+    font-size: 14px;
+}
+
+/* Inputs */
+.inputBox {
+    height: 42px;
+    width: 100%;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: var(--font-primary);
+    font-size: 14px;
+}
+
+.inputBox:focus {
+    outline: none;
+    border-color: #2845D6;
+}
+
+/* Forgot password */
+.forgot {
+    text-align: right;
+    font-size: 13px;
+}
+
+.forgot a {
+    color: #2845D6;
+    text-decoration: none;
+}
+
+.forgot a:hover {
+    text-decoration: underline;
+}
+
+/* Button */
+.submit-btn {
+    margin-top: 10px;
+    height: 42px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    background-color: #2845D6;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #1f36b5;
+}
+
+/* Bottom text */
+.bottom-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #414348;
+    text-align: center;
+}
+
+.bottom-text a {
+    color: #2845D6;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.bottom-text a:hover {
+    text-decoration: underline;
+}
