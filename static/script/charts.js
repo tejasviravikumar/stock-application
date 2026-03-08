@@ -51,28 +51,42 @@ const smeCompanies = [
 let currentCompany = smeCompanies[0];
 let priceChart = null;
 let volumeChart = null;
+let candlestickSeries = null;
+let lineSeries = null;
+let areaSeries = null;
+let volumeSeries = null;
+let currentChartType = 'candlestick';
 
 // ===========================
 // CHART DATA GENERATION
 // ===========================
 
-function generateCandlestickData(basePrice, periods = 30) {
+function generateCandlestickData(basePrice, periods = 90) {
     const data = [];
     let price = basePrice;
+    const now = new Date();
     
-    for (let i = 0; i < periods; i++) {
+    for (let i = periods - 1; i >= 0; i--) {
+        const date = new Date(now);
+        date.setDate(date.getDate() - i);
+        
+        // Skip weekends
+        if (date.getDay() === 0 || date.getDay() === 6) {
+            continue;
+        }
+        
         const open = price;
         const change = dailyRandom.range(-3, 3);
         const close = open * (1 + change / 100);
-        const high = Math.max(open, close) * (1 + dailyRandom.range(0, 1) / 100);
-        const low = Math.min(open, close) * (1 - dailyRandom.range(0, 1) / 100);
+        const high = Math.max(open, close) * (1 + dailyRandom.range(0, 1.5) / 100);
+        const low = Math.min(open, close) * (1 - dailyRandom.range(0, 1.5) / 100);
         
         data.push({
-            x: i,
-            o: open,
-            h: high,
-            l: low,
-            c: close
+            time: Math.floor(date.getTime() / 1000), // Unix timestamp in seconds
+            open: parseFloat(open.toFixed(2)),
+            high: parseFloat(high.toFixed(2)),
+            low: parseFloat(low.toFixed(2)),
+            close: parseFloat(close.toFixed(2))
         });
         
         price = close;
@@ -81,25 +95,22 @@ function generateCandlestickData(basePrice, periods = 30) {
     return data;
 }
 
-function generateVolumeData(periods = 30) {
-    const data = [];
-    for (let i = 0; i < periods; i++) {
-        data.push(dailyRandom.integer(50000, 500000));
-    }
-    return data;
+function generateVolumeData(candleData) {
+    return candleData.map(candle => {
+        const volume = dailyRandom.integer(50000, 500000);
+        return {
+            time: candle.time,
+            value: volume,
+            color: candle.close >= candle.open ? 'rgba(16, 185, 129, 0.8)' : 'rgba(239, 68, 68, 0.8)'
+        };
+    });
 }
 
-function generateLineData(basePrice, periods = 30) {
-    const data = [];
-    let price = basePrice;
-    
-    for (let i = 0; i < periods; i++) {
-        const change = dailyRandom.range(-2, 2);
-        price = price * (1 + change / 100);
-        data.push(price);
-    }
-    
-    return data;
+function generateLineData(candleData) {
+    return candleData.map(candle => ({
+        time: candle.time,
+        value: candle.close
+    }));
 }
 
 // ===========================
@@ -107,121 +118,122 @@ function generateLineData(basePrice, periods = 30) {
 // ===========================
 
 function createPriceChart(type = 'candlestick') {
-    const ctx = document.getElementById('priceChart').getContext('2d');
+    currentChartType = type;
     
-    if (priceChart) {
-        priceChart.destroy();
-    }
+    // Remove existing chart if it exists
+    const container = document.getElementById('priceChart');
+    container.innerHTML = '';
+    
+    // Create new chart
+    priceChart = LightweightCharts.createChart(container, {
+        width: container.clientWidth,
+        height: 500,
+        layout: {
+            background: { color: '#ffffff' },
+            textColor: '#64748b',
+        },
+        grid: {
+            vertLines: { color: '#f1f5f9' },
+            horzLines: { color: '#f1f5f9' },
+        },
+        crosshair: {
+            mode: LightweightCharts.CrosshairMode.Normal,
+        },
+        rightPriceScale: {
+            borderColor: '#e2e8f0',
+        },
+        timeScale: {
+            borderColor: '#e2e8f0',
+            timeVisible: true,
+            secondsVisible: false,
+        },
+    });
     
     const candleData = generateCandlestickData(currentCompany.basePrice);
-    const lineData = generateLineData(currentCompany.basePrice);
-    const labels = Array.from({length: 30}, (_, i) => `Day ${i + 1}`);
     
-    let chartConfig = {
-        type: type === 'candlestick' ? 'bar' : type === 'area' ? 'line' : 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: currentCompany.symbol,
-                data: type === 'candlestick' ? candleData.map(d => d.c) : lineData,
-                backgroundColor: type === 'area' ? 'rgba(30, 64, 175, 0.1)' : 'rgba(30, 64, 175, 0.8)',
-                borderColor: '#1e40af',
-                borderWidth: 2,
-                fill: type === 'area',
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        label: function(context) {
-                            return '₹' + context.parsed.y.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: false,
-                    ticks: {
-                        callback: function(value) {
-                            return '₹' + value.toFixed(0);
-                        }
-                    }
-                }
-            }
-        }
-    };
+    if (type === 'candlestick') {
+        candlestickSeries = priceChart.addCandlestickSeries({
+            upColor: '#10b981',
+            downColor: '#ef4444',
+            borderVisible: false,
+            wickUpColor: '#10b981',
+            wickDownColor: '#ef4444',
+        });
+        candlestickSeries.setData(candleData);
+    } else if (type === 'line') {
+        const lineData = generateLineData(candleData);
+        lineSeries = priceChart.addLineSeries({
+            color: '#1e40af',
+            lineWidth: 2,
+        });
+        lineSeries.setData(lineData);
+    } else if (type === 'area') {
+        const lineData = generateLineData(candleData);
+        areaSeries = priceChart.addAreaSeries({
+            topColor: 'rgba(30, 64, 175, 0.4)',
+            bottomColor: 'rgba(30, 64, 175, 0.05)',
+            lineColor: '#1e40af',
+            lineWidth: 2,
+        });
+        areaSeries.setData(lineData);
+    }
     
-    priceChart = new Chart(ctx, chartConfig);
+    priceChart.timeScale().fitContent();
+    
+    // Update stock info with latest candle
+    const latestCandle = candleData[candleData.length - 1];
+    updateStockInfoFromCandle(latestCandle);
 }
 
 function createVolumeChart() {
-    const ctx = document.getElementById('volumeChart').getContext('2d');
+    const container = document.getElementById('volumeChart');
+    container.innerHTML = '';
     
-    if (volumeChart) {
-        volumeChart.destroy();
-    }
-    
-    const volumeData = generateVolumeData();
-    const labels = Array.from({length: 30}, (_, i) => `Day ${i + 1}`);
-    
-    volumeChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Volume',
-                data: volumeData,
-                backgroundColor: volumeData.map((_, i) => 
-                    i % 2 === 0 ? 'rgba(16, 185, 129, 0.6)' : 'rgba(239, 68, 68, 0.6)'
-                ),
-                borderColor: volumeData.map((_, i) => 
-                    i % 2 === 0 ? '#10b981' : '#ef4444'
-                ),
-                borderWidth: 1
-            }]
+    volumeChart = LightweightCharts.createChart(container, {
+        width: container.clientWidth,
+        height: 150,
+        layout: {
+            background: { color: '#ffffff' },
+            textColor: '#64748b',
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return (value / 1000).toFixed(0) + 'K';
-                        }
-                    }
-                }
-            }
-        }
+        grid: {
+            vertLines: { color: '#f1f5f9' },
+            horzLines: { color: '#f1f5f9' },
+        },
+        rightPriceScale: {
+            borderColor: '#e2e8f0',
+        },
+        timeScale: {
+            borderColor: '#e2e8f0',
+            timeVisible: true,
+            secondsVisible: false,
+        },
     });
+    
+    const candleData = generateCandlestickData(currentCompany.basePrice);
+    const volumeData = generateVolumeData(candleData);
+    
+    volumeSeries = volumeChart.addHistogramSeries({
+        color: '#26a69a',
+        priceFormat: {
+            type: 'volume',
+        },
+        priceScaleId: '',
+    });
+    
+    volumeSeries.setData(volumeData);
+    volumeChart.timeScale().fitContent();
 }
 
 // ===========================
 // UI UPDATES
 // ===========================
 
-function updateStockInfo() {
-    const candleData = generateCandlestickData(currentCompany.basePrice, 1)[0];
-    const open = candleData.o;
-    const close = candleData.c;
-    const high = candleData.h;
-    const low = candleData.l;
+function updateStockInfoFromCandle(candle) {
+    const open = candle.open;
+    const close = candle.close;
+    const high = candle.high;
+    const low = candle.low;
     const change = close - open;
     const changePercent = (change / open) * 100;
     const volume = dailyRandom.integer(100000, 2000000);
@@ -334,20 +346,20 @@ function setupEventListeners() {
     document.getElementById('symbolSelect').addEventListener('change', (e) => {
         const symbol = e.target.value;
         currentCompany = smeCompanies.find(c => c.symbol === symbol);
-        updateStockInfo();
-        createPriceChart();
+        createPriceChart(currentChartType);
         createVolumeChart();
         displayTechnicalIndicators();
         displayMarketStats();
         displayRecentTrades();
     });
     
-    // Timeframe buttons
+    // Timeframe buttons (placeholder - different data periods)
     document.querySelectorAll('.timeframe-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.timeframe-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            createPriceChart();
+            createPriceChart(currentChartType);
+            createVolumeChart();
         });
     });
     
@@ -368,12 +380,27 @@ function setupEventListeners() {
         if (found) {
             document.getElementById('symbolSelect').value = found.symbol;
             currentCompany = found;
-            updateStockInfo();
-            createPriceChart();
+            createPriceChart(currentChartType);
             createVolumeChart();
             displayTechnicalIndicators();
             displayMarketStats();
             displayRecentTrades();
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (priceChart) {
+            const container = document.getElementById('priceChart');
+            priceChart.applyOptions({
+                width: container.clientWidth
+            });
+        }
+        if (volumeChart) {
+            const container = document.getElementById('volumeChart');
+            volumeChart.applyOptions({
+                width: container.clientWidth
+            });
         }
     });
 }
@@ -422,18 +449,17 @@ function init() {
     setInterval(updateDateTime, 1000);
     
     populateSymbolDropdown();
-    updateStockInfo();
     displayTechnicalIndicators();
     displayMarketStats();
     displayRecentTrades();
     displayNiftySME();
     
-    createPriceChart();
+    createPriceChart('candlestick');
     createVolumeChart();
     
     setupEventListeners();
     
-    console.log('Charts page initialized. Data will change tomorrow.');
+    console.log('Professional candlestick charts initialized. Data will change tomorrow.');
 }
 
 document.addEventListener('DOMContentLoaded', init);
